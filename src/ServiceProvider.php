@@ -1,5 +1,6 @@
 <?php namespace DaveJamesMiller\Breadcrumbs;
 
+use Closure;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider {
@@ -23,6 +24,28 @@ class ServiceProvider extends BaseServiceProvider {
 	{
 		return ['breadcrumbs'];
 	}
+	
+    /**
+     * Wrap a Closure such that it is shared.
+     *
+     * @param  \Closure  $closure
+     * @return \Closure
+     */
+    public function share(Closure $closure)
+    {
+        return function ($container) use ($closure) {
+            // We'll simply declare a static variable within the Closures and if it has
+            // not been set we will execute the given Closures to resolve this value
+            // and return it back to these consumers of the method as an instance.
+            static $object;
+
+            if (is_null($object)) {
+                $object = $closure($container);
+            }
+
+            return $object;
+        };
+    }
 
 	/**
 	 * Register the service provider.
@@ -31,7 +54,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['breadcrumbs'] = $this->app->singleton(function($app)
+		$this->app['breadcrumbs'] = $this->share(function($app)
 		{
 			$breadcrumbs = $this->app->make('DaveJamesMiller\Breadcrumbs\Manager');
 
