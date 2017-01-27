@@ -1,4 +1,5 @@
 {
+	"name": "davejamesmiller/laravel-breadcrumbs",
 	"repositories": [
         {
             "type": "vcs",
@@ -8,5 +9,5 @@
     "require": {
         "davejamesmiller/laravel-breadcrumbs": "dev-versionfix"
     }
-	"name": "davejamesmiller/laravel-breadcrumbs"
+	
 }
