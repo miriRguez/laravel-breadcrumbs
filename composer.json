@@ -8,4 +8,7 @@
     "require": {
         "davejamesmiller/laravel-breadcrumbs": "dev-versionfix"
     }
+	{
+	"name": "davejamesmiller/laravel-breadcrumbs"
+	}
 }
