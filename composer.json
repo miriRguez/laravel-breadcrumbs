@@ -6,6 +6,6 @@
         }
     ],
     "require": {
-        "davejamesmiller/laravel-breadcrumbs": "dev-versionfix"
+        "davejamesmiller/laravel-breadcrumbs": "dev-master"
     }
 }
